@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.5",
+    "react-spinners": "^0.13.8"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0"
+  }
+}
