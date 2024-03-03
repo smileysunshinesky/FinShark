@@ -6,6 +6,7 @@ using api.Data;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -25,7 +26,7 @@ namespace api.Repository
             return commentModel;
         }
 
-        public async Task<Comment> DeleteAsync(int id)
+        public async Task<Comment?> DeleteAsync(int id)
         {
             var commentModel = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
             
@@ -47,6 +48,23 @@ namespace api.Repository
         public async Task<Comment?> GetByIdAsync(int id)
         {
             return await _context.Comments.FindAsync(id);
+        }
+
+        public async Task<Comment?> UpdateAsync(int id, Comment commentModel)
+        {
+            var existingModel = await _context.Comments.FirstOrDefaultAsync(s => s.Id == id);
+
+            if(existingModel == null)
+            {
+                return null;
+            }
+
+            existingModel.Title = commentModel.Title;
+            existingModel.Content = commentModel.Content;
+
+            await _context.SaveChangesAsync();
+
+            return existingModel;
         }
     }
 }
