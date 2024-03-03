@@ -23,5 +23,18 @@ namespace api.Mappers
                 MarketCap = stockModel.MarketCap,
             };
         }
+
+        public static Stock ToStockFromCreateDto(this CreateStockRquestDto StockDto)
+        {
+            return new Stock
+            {
+                Symbol = StockDto.Symbol,
+                CompanyName = StockDto.CompanyName,
+                Purchase = StockDto.Purchase,
+                LastDiv = StockDto.LastDiv,
+                Industry = StockDto.Industry,
+                MarketCap = StockDto.MarketCap
+            };
+        }
     }
 }
