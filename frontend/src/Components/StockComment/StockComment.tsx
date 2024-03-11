@@ -34,18 +34,20 @@ const StockComment = ({ stockSymbol }: Props) => {
         }
       })
       .catch((e) => {
-        toast.warning(e);
+        toast.warning("Comment creation failed.");
       });
   };
 
   const getComments = () => {
     setLoading(true);
-    commentGetAPI(stockSymbol).then((res) => {
-      setLoading(false);
-      setComment(res?.data!);
-    }).catch((error) => {
-      handleError(error);
-    });
+    commentGetAPI(stockSymbol)
+      .then((res) => {
+        setLoading(false);
+        setComment(res?.data!);
+      })
+      .catch((error) => {
+        handleError(error);
+      });
   };
 
   return (
